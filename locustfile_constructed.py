@@ -24,16 +24,19 @@ class UserBehavior(TaskSet):
     def on_start(self):
       """ on_start is called when a Locust start before any task is scheduled """
       self.myid='%s' % uuid.uuid4()
+      self.getNextQuery = self.getNextQueryGenerator()
 
-    def getNextQuery(self):
+    def getNextQueryGenerator(self):
       for Q in iter(QUERIES):
         yield Q
 
     @task(len(QUERIES))
     def query(self):
-      u = "/solr/select?q=%s" % self.getNextQuery()
+      u = self.getNextQuery.next()
+      url = "/solr/select?q=%s&wt=json" % u[0]
+      print url
       start = time.time()
-      resp=self.client.get(u[0],name=u[1])
+      resp=self.client.get(url,name=u[1])
       end = time.time()
       with open(os.path.join(OUTPUT_DIR,FILE),'a') as fp:
         r=resp.json()

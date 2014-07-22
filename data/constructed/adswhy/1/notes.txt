@@ -1,0 +1,11 @@
+swarm:1/1
+
+
+#Type  Name  # requests  # fails   Median  Average   Min   Max   Content Size  # reqs/sec
+#GET   HighFreqTerms   4758  8   92  325   8   12798   158345  0
+#GET   LowFreqTerms  3395  6   180   448   9   62625   176924  0
+#GET   LowFreqTermsField   3207  206   19  45  3   1876  267097  0
+#GET   MedFreqTerms  3479  3   86  321   9   13018   173626  0
+#GET   MedFreqTermsField   3279  203   13  36  3   9984  313669  0
+#GET   HighFreqTermsField  4558  208   10  35  3   1313  279874  28.3
+#  Total   22676   634   86  203   3   62625   225740  28.3
