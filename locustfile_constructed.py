@@ -25,13 +25,13 @@ class UserBehavior(TaskSet):
       """ on_start is called when a Locust start before any task is scheduled """
       self.myid='%s' % uuid.uuid4()
 
-    def getNextUrl(self):
+    def getNextQuery(self):
       for Q in iter(QUERIES):
         yield Q
 
     @task(len(QUERIES))
     def query(self):
-      u = self.getNextUrl()
+      u = "/solr/select?q=%s" % self.getNextQuery()
       start = time.time()
       resp=self.client.get(u[0],name=u[1])
       end = time.time()
